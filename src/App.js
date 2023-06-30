@@ -1,20 +1,16 @@
-import { Routes, Route, Link, Navlink } from "react-router-dom"
+import { Routes, Route, Link, NavLink } from "react-router-dom"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 
 import { ProductDetail } from "./views/ProductDetail"
 import { Home } from "./views/Home"
+import { Products } from "./views/Products"
+import json from "./data/products.json"
 
-import products from "./data/products.json"
+const Error404 = () => <div>Error 404</div>
 
-const Products = () => (
-	<ul>
-		{products.map(product => (
-			<li key={product.id}>{product.name}</li>
-		))}
-	</ul>
-)
+const categories = ["zapatos", "zapatillas"]
 
 function App() {
 	return (
@@ -23,15 +19,20 @@ function App() {
 				<Container>
 					<Navbar.Brand href="#home">Navbar</Navbar.Brand>
 					<Nav className="me-auto">
-						<Nav.Link href="#home">Home</Nav.Link>
-						<Nav.Link href="#features">Features</Nav.Link>
-						<Nav.Link href="#pricing">Pricing</Nav.Link>
+						{categories.map(category => (
+							<NavLink className="nav-link" to={`/category/${category}`}>
+								{category}
+							</NavLink>
+						))}
+						<NavLink className="nav-link" to="contact">
+							Contact
+						</NavLink>
 					</Nav>
 				</Container>
 			</Navbar>
 			<Container className="mt-4">
 				<Routes>
-					<Route path="/" element={<Home />} />
+					<Route path="/" element={<Products />} />
 					<Route
 						path="/contact"
 						element={
@@ -41,9 +42,11 @@ function App() {
 							</div>
 						}
 					/>
-					<Route path="/products" element={<Products />} />
+					<Route path="/category/:categoryId" element={<Products />} />
+
 					<Route path="/products/:id" element={<ProductDetail />} />
-					<Route path="*" element={404} />
+
+					<Route path="*" element={<Error404 />} />
 				</Routes>
 			</Container>
 		</>
