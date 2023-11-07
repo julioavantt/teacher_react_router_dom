@@ -3,7 +3,13 @@ import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 
-export const NavBar = ({ categories }) => (
+import data from "../data/products.json"
+
+const categories = data.map(item => item.category)
+
+const uniqueCategories = new Set(categories)
+
+export const NavBar = () => (
 	<Navbar bg="dark" data-bs-theme="dark">
 		<Container>
 			<Navbar.Brand>Navbar</Navbar.Brand>
@@ -11,7 +17,7 @@ export const NavBar = ({ categories }) => (
 				<NavLink to="/">
 					<span className="nav-link">Home</span>
 				</NavLink>
-				{[...categories].map(category => (
+				{[...uniqueCategories].map(category => (
 					<NavLink key={category} to={`/category/${category}`}>
 						<span className="nav-link">{category}</span>
 					</NavLink>
