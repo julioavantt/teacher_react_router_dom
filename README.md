@@ -23,7 +23,7 @@
 -  Esta aplicación está creada con Create React App.
 -  Clonarla ejecutando git clone https://github.com/julioavantt/teacher_react_router_dom.git
 -  Para iniciarla, luego de clonar, entrar a la carpeta del proyecto, ejecute npm i para instalar dependencias y luego mpm start para arrancar el servidor de desarrollo.
--  En App tenemos 3 importaciones del mismo componente apuntando a 3 archivos distintos, probar una por una descomentando y comentando.
+-  Mirar toda la aplicación desde el Archivo App.js.
 
 <br>
 
