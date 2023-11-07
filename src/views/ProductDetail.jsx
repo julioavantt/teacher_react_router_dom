@@ -7,6 +7,7 @@ export const ProductDetail = () => {
 	const [productId, setProductId] = useState(null)
 	const { id } = useParams()
 
+	console.log({ id })
 	useEffect(() => {
 		setProductId(products.find(product => product.id === Number(id)))
 	}, [id])

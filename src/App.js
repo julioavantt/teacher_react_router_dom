@@ -1,55 +1,48 @@
-import { Routes, Route, Link, NavLink } from "react-router-dom"
+import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
 
-import { ProductDetail } from "./views/ProductDetail"
 import { Home } from "./views/Home"
-import { Products } from "./views/Products"
-import json from "./data/products.json"
+import { ProductDetail } from "./views/ProductDetail"
+import data from "./data/products.json"
+import "./App.css"
 
-const Error404 = () => <div>Error 404</div>
+const categories = data.map(item => item.category)
 
-const categories = ["zapatos", "zapatillas"]
+const uniqueCategories = new Set(categories)
+
+const Contact = () => <div>contact</div>
 
 function App() {
 	return (
-		<>
-			<Navbar bg="primary" data-bs-theme="dark">
+		<BrowserRouter>
+			<Navbar bg="dark" data-bs-theme="dark">
 				<Container>
 					<Navbar.Brand href="#home">Navbar</Navbar.Brand>
 					<Nav className="me-auto">
-						{categories.map(category => (
-							<NavLink className="nav-link" to={`/category/${category}`}>
-								{category}
+						<NavLink to="/">
+							<span className="nav-link">Home</span>
+						</NavLink>
+						{[...uniqueCategories].map(category => (
+							<NavLink key={category} to={`/category/${category}`}>
+								<span className="nav-link">{category}</span>
 							</NavLink>
 						))}
-						<NavLink className="nav-link" to="contact">
-							Contact
+						<NavLink to="/contact">
+							<span className="nav-link">Contact</span>
 						</NavLink>
 					</Nav>
 				</Container>
 			</Navbar>
-			<Container className="mt-4">
-				<Routes>
-					<Route path="/" element={<Products />} />
-					<Route
-						path="/contact"
-						element={
-							<div>
-								<h1>Contact</h1>
-								<Link to="/">IR A HOME</Link>
-							</div>
-						}
-					/>
-					<Route path="/category/:categoryId" element={<Products />} />
-
-					<Route path="/products/:id" element={<ProductDetail />} />
-
-					<Route path="*" element={<Error404 />} />
-				</Routes>
-			</Container>
-		</>
+			<Routes>
+				<Route path="/" element={<Home />} />
+				<Route path="/contact" element={<Contact />} />
+				<Route path="/products/:id" element={<ProductDetail />} />
+				<Route path="/category/:categoryId" element={<Home />} />
+				<Route path="*" element={404} />
+			</Routes>
+		</BrowserRouter>
 	)
 }
 

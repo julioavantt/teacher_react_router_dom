@@ -1,7 +1,7 @@
 [
 	{
 		"name": "Car",
-		"id": 1,
+		"id": "1",
 		"category": "zapatos",
 		"detail": "Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500",
 		"img": "https://upload.wikimedia.org/wikipedia/commons/6/61/Cars_movie%27s_car.jpg"
